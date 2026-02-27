@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Duggu 💖</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+text-align:center;
+color:white;
+overflow:hidden;
+
+background:linear-gradient(-45deg,#ff758c,#ff7eb3,#ff9a9e,#fad0c4);
+background-size:400% 400%;
+animation:bg 10s infinite;
+}
+
+@keyframes bg{
+0%{background-position:0%}
+50%{background-position:100%}
+100%{background-position:0%}
+}
+
+.box{
+margin-top:60px;
+padding:20px;
+animation:fade 0.8s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+h1{font-size:30px}
+h2{font-size:24px}
+
+input,button{
+padding:12px;
+margin:10px;
+border:none;
+border-radius:12px;
+font-size:18px;
+width:80%;
+max-width:300px;
+}
+
+button{
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{transform:scale(1.08)}
+
+.no{
+background:#333;
+position:relative;
+}
+
+/* stars */
+.star{
+position:fixed;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+animation:fall linear infinite;
+}
+@keyframes fall{
+from{transform:translateY(-10px)}
+to{transform:translateY(100vh)}
+}
+
+/* hearts */
+.heart{
+position:fixed;
+font-size:18px;
+animation:float 5s linear infinite;
+}
+@keyframes float{
+from{transform:translateY(100vh)}
+to{transform:translateY(-10vh)}
+}
+
+/* gif */
+.gif{
+width:120px;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- START -->
+<div class="box" id="start">
+<h1>Hey Duggu 💖</h1>
+<p>End tak zaroor dekhna… 💫</p>
+<button onclick="start()">Start 🎁</button>
+</div>
+
+<!-- PASSWORD -->
+<div class="box" id="l1" style="display:none;">
+<h2>Password 🤭</h2>
+<input id="pass">
+<button onclick="c1()">Submit</button>
+<p id="m1"></p>
+</div>
+
+<!-- NICKNAME -->
+<div class="box" id="l2" style="display:none;">
+<h2>Ek nickname batao jo sirf main bulata hu 💭</h2>
+<input id="n2">
+<button onclick="c2()">Submit</button>
+<p id="m2"></p>
+</div>
+
+<!-- LOVE -->
+<div class="box" id="l3" style="display:none;">
+<h2>Sabse jyada pyar kaun karta hai? ❤️</h2>
+<input id="n3">
+<button onclick="c3()">Submit</button>
+<p id="m3"></p>
+<div id="cry"></div>
+</div>
+
+<!-- NIGHT WALK -->
+<div class="box" id="l4" style="display:none;">
+<h2>Night walk pasand hai? 🌙</h2>
+<button onclick="tease()">Haa</button>
+<button onclick="next('l4','l5')">Bahut jyada ❤️</button>
+<p id="m4"></p>
+</div>
+
+<!-- WALK -->
+<div class="box" id="l5" style="display:none;">
+<h2>Shaam ko walk pe chale? 😚</h2>
+<button onclick="goFinal()">Yes</button>
+<button class="no" id="no">No</button>
+</div>
+
+<!-- FINAL -->
+<div class="box" id="final" style="display:none;">
+<h2>🎉 Happy Birthday Duggu 🎂</h2>
+
+<p>
+Aapke Buggu ke or se ek chhota sa surprise 🥰<br><br>
+
+God bless mera bachaa 🤞🧿💫<br><br>
+
+Meri jindagi main aane k liye thankyou 🥰<br><br>
+
+Main humesa esa hi rahunga aur itna hi pyar karunga 💖<br><br>
+
+Har ek pal mera dil bas aapke naam se dhadkega ❤️<br><br>
+
+Aap humesa khus rahe meri pyari duggu 💕<br><br>
+
+<b>I LOVE YOU 3000 ❤️</b>
+</p>
+</div>
+
+<script>
+let attempt=0;
+
+function start(){
+start.style.display="none";
+l1.style.display="block";
+music.play();
+}
+
+/* password */
+function c1(){
+if(pass.value==="1308"){next('l1','l2')}
+else{m1.innerText="Wrong 😭"}
+}
+
+/* nickname */
+function c2(){
+let v=["roshni","aishu","rapunzel","miss marvel"];
+if(v.includes(n2.value.toLowerCase())){
+next('l2','l3')
+}else{
+attempt++;
+m2.innerText=attempt==1?
+"aapko itna bhi nahi yaad 😭 try again":
+"phir se galat jawab 😭";
+}
+}
+
+/* love */
+function c3(){
+let a=n3.value.toLowerCase();
+if(a==="aap"||a==="buggu"||a==="arjun"){
+next('l3','l4')
+}else{
+cry.innerHTML='<img class="gif" src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">';
+}
+}
+
+/* tease */
+function tease(){
+m4.innerText="bas haa 😾";
+}
+
+/* no move */
+no.addEventListener("mouseover",()=>{
+no.style.position="absolute";
+no.style.left=Math.random()*80+"%";
+no.style.top=Math.random()*80+"%";
+});
+
+/* final */
+function goFinal(){
+next('l5','final');
+effects();
+}
+
+/* next */
+function next(a,b){
+document.getElementById(a).style.display="none";
+document.getElementById(b).style.display="block";
+}
+
+/* effects */
+function effects(){
+
+/* stars */
+for(let i=0;i<50;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.left=Math.random()*100+"%";
+s.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(s);
+}
+
+/* hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"%";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},400);
+
+}
+</script>
+
+</body>
+</html>
